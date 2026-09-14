@@ -1,4 +1,4 @@
-# Development Branch
+# Dev Branch
 
 This repository has been initialized on the `dev` branch.
 
@@ -9,12 +9,3 @@ This branch is intended for active development, testing, and integration work be
 - Branch: `dev`
 - Repository initialized for development work
 - Ready for feature development and testing
-
-## Next Steps
-1. Add project files and source code
-2. Commit feature work here
-3. Merge into `main` when ready for production
-
----
-
-This README was created to initialize the dev branch.
