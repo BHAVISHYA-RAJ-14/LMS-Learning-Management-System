@@ -1,0 +1,199 @@
+:root {
+  --primary-color: #0b6623;     /* GLA Forest Green */
+  --primary-dark: #074818;
+  --accent-color: #1e88e5;
+  --bg-main: #f4f6f9;
+  --surface: #ffffff;
+  --text-main: #212529;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* Auth Body Layout */
+.auth-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 1rem;
+}
+
+.login-card {
+  background: var(--surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.brand-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.brand-header h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.brand-header p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Global Navigation Bar */
+.navbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.navbar .nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary-color);
+}
+
+/* Container & Grid */
+.main-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Reusable Cards */
+.card {
+  background: var(--surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card h3 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.alert-error {
+  background: #fde8e8;
+  color: #9b1c1c;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive tablet fixes */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .main-container {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Responsive Navigation & Card Layout v1.0 === */
+
+/* Tablet viewport grid margin fix: margin adjusted to 1rem auto */
