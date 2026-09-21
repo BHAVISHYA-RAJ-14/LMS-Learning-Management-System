@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GLA LMS - Assignments & Assessments</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">GLA LMS</div>
+    <ul class="nav-links">
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="assignments.html" class="active">Assignments</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><button onclick="handleLogout()" class="btn-primary" style="padding: 0.4rem 0.8rem; width: auto;">Logout</button></li>
+    </ul>
+  </nav>
+
+  <div class="main-container">
+    <h2>Academic Assignments & Evaluations</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Review deadline schedules and submit deliverables.</p>
+    <div id="assignmentsList"></div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/assignments.js"></script>
+</body>
+</html>
