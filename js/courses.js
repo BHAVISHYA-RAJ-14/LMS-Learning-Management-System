@@ -47,3 +47,5 @@ function viewCourseDetails(courseId) {
 }
 
 // Dynamic card injection with error boundary handling enabled
+
+// Error boundary: fetch failure shows inline alert-error div
