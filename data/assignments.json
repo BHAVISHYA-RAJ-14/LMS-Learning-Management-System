@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ASN-101",
+    "courseId": "CS-301",
+    "title": "Lab Assignment 1: Architecture Documentation",
+    "dueDate": "2026-10-05",
+    "maxMarks": 20,
+    "description": "Prepare a 2-page architectural description document highlighting 3-tier modular layers."
+  },
+  {
+    "id": "ASN-102",
+    "courseId": "CS-302",
+    "title": "Mini Project: DOM Routing Prototype",
+    "dueDate": "2026-10-12",
+    "maxMarks": 30,
+    "description": "Construct single-page dynamic view switching using client-side JavaScript."
+  }
+]
