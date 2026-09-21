@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GLA LMS - User Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">GLA LMS</div>
+    <ul class="nav-links">
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="assignments.html">Assignments</a></li>
+      <li><a href="profile.html" class="active">Profile</a></li>
+      <li><button onclick="handleLogout()" class="btn-primary" style="padding: 0.4rem 0.8rem; width: auto;">Logout</button></li>
+    </ul>
+  </nav>
+
+  <div class="main-container">
+    <div class="card" style="max-width: 600px; margin: 0 auto;">
+      <h3>Academic Profile Details</h3>
+      <div id="profile-content" style="margin-top: 1rem;">
+        <p><strong>Name:</strong> <span id="prof-name">Loading...</span></p>
+        <p><strong>ID / Roll No:</strong> <span id="prof-id">-</span></p>
+        <p><strong>Role:</strong> <span id="prof-role" style="text-transform: capitalize;">-</span></p>
+        <p><strong>Department:</strong> <span id="prof-dept">-</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    const user = checkAuth();
+    if (user) {
+      document.getElementById('prof-name').textContent = user.name;
+      document.getElementById('prof-id').textContent = user.rollNo || user.id;
+      document.getElementById('prof-role').textContent = user.role;
+      document.getElementById('prof-dept').textContent = user.department || 'N/A';
+    }
+  </script>
+</body>
+</html>
