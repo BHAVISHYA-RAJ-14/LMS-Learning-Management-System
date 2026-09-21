@@ -63,3 +63,5 @@ function submitAssignment(asnId) {
 }
 
 // localStorage persistence layer for submission state across sessions
+
+// localStorage persistence: lms_submissions key tracks all student submissions
