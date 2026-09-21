@@ -1,0 +1,27 @@
+[
+  {
+    "id": "USR-001",
+    "username": "admin@gla.ac.in",
+    "password": "admin@password123",
+    "role": "admin",
+    "name": "System Administrator",
+    "department": "Computer Engineering"
+  },
+  {
+    "id": "USR-002",
+    "username": "yash.singh@gla.ac.in",
+    "password": "teacher@password123",
+    "role": "teacher",
+    "name": "Prof. Yash Singh",
+    "department": "Computer Science"
+  },
+  {
+    "id": "USR-003",
+    "username": "bhavishya.raj@gla.ac.in",
+    "password": "student@password123",
+    "role": "student",
+    "name": "Bhavishya Raj",
+    "rollNo": "2415000441",
+    "semester": "5th Sem"
+  }
+]
