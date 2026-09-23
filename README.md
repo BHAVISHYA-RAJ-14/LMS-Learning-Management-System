@@ -1,1 +1,1 @@
-Learning Management systemm
+Learning Management system
