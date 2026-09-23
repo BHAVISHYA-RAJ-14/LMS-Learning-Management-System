@@ -1,1 +1,1 @@
-Learning Management system
+Learning Management system mini project
