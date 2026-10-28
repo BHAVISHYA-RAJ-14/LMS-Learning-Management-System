@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLA LMS - Portal Authentication</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="brand-header">
+        <h2>GLA University LMS</h2>
+        <p>Department of Computer Engineering</p>
+      </div>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="email">Institutional ID / Email</label>
+          <input type="email" id="email" required placeholder="name@gla.ac.in">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="••••••••">
+        </div>
+        <div id="error-msg" class="alert-error" style="display: none;"></div>
+        <button type="submit" class="btn-primary">Authenticate</button>
+      </form>
+    </div>
+  </div>
+  <script src="js/auth.js"></script>
+</body>
+</html>
