@@ -17,7 +17,7 @@ async function handleLogin(event) {
     if (matchedUser) {
       sessionStorage.setItem("currentUser", JSON.stringify(matchedUser));
       sessionStorage.setItem("userRole", matchedUser.role);
-      window.location.href = "courses.html";
+      window.location.href = "dashboard.html";
     } else {
       errorMessage.textContent = "Invalid academic credentials. Please re-check.";
       errorMessage.style.display = "block";
@@ -48,6 +48,43 @@ function handleLogout() {
   window.location.href = "index.html";
 }
 
-// Route guard and logout lifecycle - fully wired
 
-// Route guard and logout lifecycle fully wired - v1.0
+
+// theme handling, remembered between visits
+function applyTheme(mode) {
+  document.documentElement.setAttribute("data-theme", mode);
+  localStorage.setItem("lms_theme", mode);
+}
+
+applyTheme(localStorage.getItem("lms_theme") || "light");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelector(".nav-links");
+  if (!links) return;
+  const li = document.createElement("li");
+  li.innerHTML = '<button class="btn-ghost" id="themeBtn"></button>';
+  links.insertBefore(li, links.lastElementChild);
+  const btn = document.getElementById("themeBtn");
+  const label = () => (btn.textContent = document.documentElement.dataset.theme === "dark" ? "Light mode" : "Dark mode");
+  label();
+  btn.addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+    label();
+  });
+});
+
+// submissions are stored per user so accounts do not share status
+function submissionKey(asnId) {
+  const user = JSON.parse(sessionStorage.getItem("currentUser"));
+  return (user ? user.id : "guest") + ":" + asnId;
+}
+
+function getSubmissions() {
+  return JSON.parse(localStorage.getItem("lms_submissions") || "{}");
+}
+
+function daysLeft(dateStr) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.round((new Date(dateStr) - today) / 86400000);
+}
