@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ASN-101",
+    "courseId": "CS-301",
+    "title": "Lab Assignment 1: Architecture Documentation",
+    "dueDate": "2026-10-20",
+    "maxMarks": 20,
+    "description": "Prepare a 2-page architectural description document highlighting 3-tier modular layers."
+  },
+  {
+    "id": "ASN-102",
+    "courseId": "CS-302",
+    "title": "Mini Project: DOM Routing Prototype",
+    "dueDate": "2026-10-30",
+    "maxMarks": 30,
+    "description": "Construct single-page dynamic view switching using client-side JavaScript."
+  },
+  {
+    "id": "ASN-103",
+    "courseId": "CS-303",
+    "title": "Assignment 2: Normalization Exercises",
+    "dueDate": "2026-11-06",
+    "maxMarks": 15,
+    "description": "Normalize the given student-records schema up to BCNF and show each step."
+  },
+  {
+    "id": "ASN-104",
+    "courseId": "CS-301",
+    "title": "Lab Assignment 2: Docker Deployment",
+    "dueDate": "2026-11-14",
+    "maxMarks": 25,
+    "description": "Containerize a simple web app and submit the Dockerfile with a short run report."
+  }
+]

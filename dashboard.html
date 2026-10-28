@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLA LMS - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">GLA LMS</div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="assignments.html">Assignments</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><button onclick="handleLogout()" class="btn-primary" style="padding: 0.4rem 0.8rem; width: auto;">Logout</button></li>
+    </ul>
+  </nav>
+
+  <div class="main-container">
+    <div class="page-head">
+      <div>
+        <h2 id="welcome">Welcome</h2>
+        <p class="muted" id="roleLine"></p>
+      </div>
+      <span id="today" class="muted"></span>
+    </div>
+
+    <div class="stat-grid" id="stats"></div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 id="listTitle">Upcoming deadlines</h3>
+        <div id="deadlines"></div>
+      </div>
+      <div class="card">
+        <h3>Announcements</h3>
+        <div id="notices"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
