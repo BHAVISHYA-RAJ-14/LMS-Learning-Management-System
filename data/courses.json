@@ -1,0 +1,29 @@
+[
+  {
+    "id": "CS-301",
+    "code": "BCSE3001",
+    "title": "Cloud Computing & DevOps",
+    "instructor": "Prof. Yash Singh",
+    "credits": 4,
+    "syllabus": "Virtualization, AWS Core, Containerization, Kubernetes, CI/CD pipelines.",
+    "activeEnrolled": 68
+  },
+  {
+    "id": "CS-302",
+    "code": "BCSE3002",
+    "title": "Full-Stack Web Development",
+    "instructor": "Dr. R. Sharma",
+    "credits": 3,
+    "syllabus": "HTML5, CSS3, ES6 JavaScript, DOM APIs, Client-side Storage Architecture.",
+    "activeEnrolled": 72
+  },
+  {
+    "id": "CS-303",
+    "code": "BCSE3005",
+    "title": "Database Management Systems",
+    "instructor": "Prof. K. Verma",
+    "credits": 4,
+    "syllabus": "Relational Schemas, Normalization, JSON data parsing, Transaction controls.",
+    "activeEnrolled": 65
+  }
+]
