@@ -1,5 +1,6 @@
 [
   {
+
     "id": "ASN-101",
     "courseId": "CS-301",
     "title": "Lab Assignment 1: Architecture Documentation",
@@ -14,5 +15,38 @@
     "dueDate": "2026-10-12",
     "maxMarks": 30,
     "description": "Construct single-page dynamic view switching using client-side JavaScript."
+  }
+  {
+
+    "id": "A101",
+    "title": "HTML5 & CSS Grid Layout",
+    "course": "Web Development",
+    "dueDate": "2026-10-05",
+    "maxMarks": 100,
+    "status": "Pending"
+  },
+  {
+    "id": "A102",
+    "title": "JavaScript DOM Manipulation Quiz",
+    "course": "Web Development",
+    "dueDate": "2026-10-10",
+    "maxMarks": 50,
+    "status": "Submitted"
+  }
+  {
+    "id": "ASN-103",
+    "courseId": "CS-303",
+    "title": "Assignment 2: Normalization Exercises",
+    "dueDate": "2026-11-06",
+    "maxMarks": 15,
+    "description": "Normalize the given student-records schema up to BCNF and show each step."
+  },
+  {
+    "id": "ASN-104",
+    "courseId": "CS-301",
+    "title": "Lab Assignment 2: Docker Deployment",
+    "dueDate": "2026-11-14",
+    "maxMarks": 25,
+    "description": "Containerize a simple web app and submit the Dockerfile with a short run report."
   }
 ]
