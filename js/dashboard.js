@@ -4,24 +4,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!user) return;
 
   const firstName = user.name.replace(/^(Prof\.|Dr\.)\s*/, "").split(" ")[0];
-  document.getElementById("welcome").textContent = "Welcome back, " + firstName;
-  document.getElementById("roleLine").textContent =
-    user.role.charAt(0).toUpperCase() + user.role.slice(1) + " account" + (user.semester ? ", " + user.semester : "");
-  document.getElementById("today").textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const hour = new Date().getHours();
+  const timeGreeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+
+  const welcomeEl = document.getElementById("welcome");
+  if (welcomeEl) {
+    welcomeEl.textContent = `${timeGreeting}, ${firstName}`;
+  }
+
+  const roleEl = document.getElementById("roleLine");
+  if (roleEl) {
+    roleEl.textContent =
+      user.role.charAt(0).toUpperCase() + user.role.slice(1) + " account" + (user.semester ? ", " + user.semester : "");
+  }
+
+  const todayEl = document.getElementById("today");
+  if (todayEl) {
+    todayEl.textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  }
 
   try {
     const [courses, assignments, notices, users] = await Promise.all([
-      fetch("./data/courses.json").then(r => r.json()),
-      fetch("./data/assignments.json").then(r => r.json()),
-      fetch("./data/announcements.json").then(r => r.json()),
-      fetch("./data/users.json").then(r => r.json())
+      fetch("./data/courses.json").then(r => r.ok ? r.json() : []),
+      fetch("./data/assignments.json").then(r => r.ok ? r.json() : []),
+      fetch("./data/announcements.json").then(r => r.ok ? r.json() : []),
+      fetch("./data/users.json").then(r => r.ok ? r.json() : [])
     ]);
     showStats(user, courses, assignments, users);
     showDeadlines(user, courses, assignments);
     showNotices(notices);
   } catch (err) {
     console.error("Dashboard error:", err);
-    document.getElementById("stats").innerHTML = '<div class="alert-error">Could not load dashboard data. Use a local server.</div>';
+    const statsBox = document.getElementById("stats");
+    if (statsBox) {
+      statsBox.innerHTML = '<div class="alert-error">Could not load dashboard data. Use a local server.</div>';
+    }
   }
 });
 
@@ -47,12 +64,15 @@ function showStats(user, courses, assignments, users) {
     html = statBox(users.length, "Registered users") + statBox(courses.length, "Active courses") +
            statBox(assignments.length, "Assignments posted");
   }
-  document.getElementById("stats").innerHTML = html;
+  const statsBox = document.getElementById("stats");
+  if (statsBox) statsBox.innerHTML = html;
 }
 
 function showDeadlines(user, courses, assignments) {
   const subs = getSubmissions();
   const box = document.getElementById("deadlines");
+  if (!box) return;
+
   const list = assignments
     .filter(a => user.role !== "student" || !subs[submissionKey(a.id)])
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
@@ -70,7 +90,13 @@ function showDeadlines(user, courses, assignments) {
 }
 
 function showNotices(notices) {
-  document.getElementById("notices").innerHTML = notices.map(n =>
+  const box = document.getElementById("notices");
+  if (!box) return;
+  if (!notices || notices.length === 0) {
+    box.innerHTML = '<p class="muted">No announcements posted at this time.</p>';
+    return;
+  }
+  box.innerHTML = notices.map(n =>
     '<div class="list-row" style="display:block"><strong>' + n.title + '</strong><br><span class="muted">' + n.date + '</span><p style="font-size:0.9rem">' + n.text + '</p></div>'
   ).join("");
 }
