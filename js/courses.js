@@ -69,7 +69,24 @@ function renderCourses(courses) {
 }
 
 function viewCourseDetails(courseId) {
-  alert(`Navigating to Course Detail Context: ${courseId}`);
+  const course = allCourses.find((c) => c.id === courseId);
+  if (!course) {
+    alert("Course detail record could not be located.");
+    return;
+  }
+
+  const details = [
+    `Course: ${course.code} - ${course.title}`,
+    "--------------------------------------------------",
+    `Instructor: ${course.instructor}`,
+    `Credits: ${course.credits} Unit(s)`,
+    `Active Enrollment: ${course.activeEnrolled || "N/A"} students`,
+    "",
+    "Syllabus & Core Modules:",
+    course.syllabus || "No syllabus outline currently published."
+  ].join("\n");
+
+  alert(details);
 }
 
 // Dynamic card injection with error boundary handling enabled
