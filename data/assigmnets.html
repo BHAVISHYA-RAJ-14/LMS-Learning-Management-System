@@ -2,27 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>GLA LMS - Assignments & Assessments</title>
+
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-brand">GLA LMS</div>
+
     <ul class="nav-links">
       <li><a href="courses.html">Courses</a></li>
-      <li><a href="assignments.html" class="active">Assignments</a></li>
+
+      <li>
+        <a href="assignments.html" class="active">Assignments</a>
+      </li>
+
       <li><a href="profile.html">Profile</a></li>
-      <li><button onclick="handleLogout()" class="btn-primary" style="padding: 0.4rem 0.8rem; width: auto;">Logout</button></li>
+
+      <li>
+        <button
+          onclick="handleLogout()"
+          class="btn-primary logout-btn">
+          Logout
+        </button>
+      </li>
     </ul>
   </nav>
 
-  <div class="main-container">
-    <h2>Academic Assignments & Evaluations</h2>
-    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Review deadline schedules and submit deliverables.</p>
-    <div id="assignmentsList"></div>
-  </div>
+  <!-- Main Content -->
+  <main class="main-container">
 
+    <h2>Academic Assignments & Evaluations</h2>
+
+    <p class="page-description">
+      Review deadlines, track your progress, and submit assignments.
+    </p>
+
+    <!-- Dashboard Statistics -->
+    <section class="assignment-stats" aria-label="Assignment summary">
+
+      <div class="card stat-card">
+        <h3>Total Assignments</h3>
+        <p id="totalAssignments" class="stat-number">0</p>
+      </div>
+
+      <div class="card stat-card">
+        <h3>Pending</h3>
+        <p id="pendingAssignments" class="stat-number">0</p>
+      </div>
+
+      <div class="card stat-card">
+        <h3>Submitted</h3>
+        <p id="submittedAssignments" class="stat-number">0</p>
+      </div>
+
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="assignment-controls">
+
+      <input
+        type="search"
+        id="searchAssignments"
+        placeholder="Search by title, course ID, or description..."
+        aria-label="Search assignments"
+      >
+
+      <select id="statusFilter" aria-label="Filter assignments by status">
+        <option value="all">All Assignments</option>
+        <option value="pending">Pending</option>
+        <option value="submitted">Submitted</option>
+      </select>
+
+    </section>
+
+    <!-- Assignment List -->
+    <section
+      id="assignmentsList"
+      aria-label="Assignment list"
+      aria-live="polite">
+
+      <p>Loading assignments...</p>
+
+    </section>
+
+  </main>
+
+  <!-- JavaScript Files -->
   <script src="js/auth.js"></script>
   <script src="js/assignments.js"></script>
+
 </body>
 </html>
