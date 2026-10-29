@@ -17,6 +17,7 @@ async function loadCourseCatalog() {
     
     allCourses = await response.json();
     if (loadingIndicator) loadingIndicator.style.display = "none";
+    updateCourseMetrics(allCourses);
     renderCourses(allCourses);
   } catch (error) {
     console.error("Course Loading Error:", error);
@@ -27,15 +28,31 @@ async function loadCourseCatalog() {
   }
 }
 
+function updateCourseMetrics(courses = []) {
+  const badge = document.getElementById("userBadge");
+  if (!badge) return;
+  const totalCredits = courses.reduce((sum, c) => sum + (Number(c.credits) || 0), 0);
+  badge.textContent = `${courses.length} Module${courses.length === 1 ? "" : "s"} | ${totalCredits} Credit(s)`;
+}
+
+function getCourseStatistics() {
+  const totalCourses = allCourses.length;
+  const totalCredits = allCourses.reduce((sum, c) => sum + (Number(c.credits) || 0), 0);
+  const totalEnrolled = allCourses.reduce((sum, c) => sum + (Number(c.activeEnrolled) || 0), 0);
+  return { totalCourses, totalCredits, totalEnrolled };
+}
+
 function filterCourses(query = "") {
   const q = query.trim().toLowerCase();
   if (!q) {
+    updateCourseMetrics(allCourses);
     renderCourses(allCourses);
     return;
   }
   const filtered = allCourses.filter((course) =>
     (course.title + " " + course.code + " " + course.instructor + " " + (course.syllabus || "")).toLowerCase().includes(q)
   );
+  updateCourseMetrics(filtered);
   renderCourses(filtered);
 }
 
