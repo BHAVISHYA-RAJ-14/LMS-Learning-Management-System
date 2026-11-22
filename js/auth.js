@@ -1,12 +1,26 @@
 // Handles authentication verification and session management
 function getCurrentUser() {
+  const storedUser = sessionStorage.getItem("currentUser");
+  if (!storedUser) return null;
+
+  let user;
   try {
-    const raw = sessionStorage.getItem("currentUser");
-    return raw ? JSON.parse(raw) : null;
-  } catch (err) {
-    console.error("Error parsing current user session:", err);
+    user = JSON.parse(storedUser);
+  } catch (error) {
+    console.error("Could not read current user session:", error);
+    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("userRole");
     return null;
   }
+
+  if (!user || typeof user !== "object" || Array.isArray(user)) {
+    console.error("Could not read current user session: invalid session data");
+    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("userRole");
+    return null;
+  }
+
+  return user;
 }
 
 async function handleLogin(event) {
@@ -14,7 +28,9 @@ async function handleLogin(event) {
   const emailInput = document.getElementById("email").value.trim();
   const passwordInput = document.getElementById("password").value.trim();
   const errorMessage = document.getElementById("error-msg");
-  const submitBtn = event.target.querySelector("button[type='submit']");
+  const submitBtn = event.target
+    ? event.target.querySelector("button[type='submit']")
+    : null;
 
   if (errorMessage) {
     errorMessage.style.display = "none";
