@@ -1,78 +1,72 @@
-// loads the course list and handles searching
+// Asynchronously fetches course listings and injects them into the DOM
 let allCourses = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (checkAuth()) {
+  const activeUser = checkAuth();
+  if (activeUser) {
     loadCourseCatalog();
-    const searchBox = document.getElementById("searchBox");
-    if (searchBox) {
-      searchBox.addEventListener("input", filterCourses);
-      searchBox.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          clearCourseSearch();
-        }
-      });
-    }
   }
 });
 
 async function loadCourseCatalog() {
-  const loading = document.getElementById("loadingIndicator");
+  const loadingIndicator = document.getElementById("loadingIndicator");
+
   try {
     const response = await fetch("./data/courses.json");
-    if (!response.ok) throw new Error("HTTP error " + response.status);
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    
     allCourses = await response.json();
-    if (loading) loading.style.display = "none";
+    if (loadingIndicator) loadingIndicator.style.display = "none";
+    updateCourseMetrics(allCourses);
     renderCourses(allCourses);
   } catch (error) {
-    console.error("Course loading error:", error);
-    if (loading) {
-      loading.textContent = "Failed to load courses. Run the project through a local server.";
-      loading.classList.add("alert-error");
+    console.error("Course Loading Error:", error);
+    if (loadingIndicator) {
+      loadingIndicator.textContent = "Failed to load courses. Run application via a local server.";
+      loadingIndicator.classList.add("alert-error");
     }
   }
 }
 
-function clearCourseSearch() {
-  const searchBox = document.getElementById("searchBox");
-  if (searchBox) {
-    searchBox.value = "";
-    filterCourses();
-    searchBox.focus();
-  }
+function updateCourseMetrics(courses = []) {
+  const badge = document.getElementById("userBadge");
+  if (!badge) return;
+  const totalCredits = courses.reduce((sum, c) => sum + (Number(c.credits) || 0), 0);
+  badge.textContent = `${courses.length} Module${courses.length === 1 ? "" : "s"} | ${totalCredits} Credit(s)`;
 }
 
-function filterCourses() {
-  const searchBox = document.getElementById("searchBox");
-  const q = searchBox ? searchBox.value.trim().toLowerCase() : "";
-  const matches = allCourses.filter(c =>
-    (c.title + " " + c.code + " " + c.instructor + " " + (c.syllabus || "")).toLowerCase().includes(q)
+function getCourseStatistics() {
+  const totalCourses = allCourses.length;
+  const totalCredits = allCourses.reduce((sum, c) => sum + (Number(c.credits) || 0), 0);
+  const totalEnrolled = allCourses.reduce((sum, c) => sum + (Number(c.activeEnrolled) || 0), 0);
+  return { totalCourses, totalCredits, totalEnrolled };
+}
+
+function filterCourses(query = "") {
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    updateCourseMetrics(allCourses);
+    renderCourses(allCourses);
+    return;
+  }
+  const filtered = allCourses.filter((course) =>
+    (course.title + " " + course.code + " " + course.instructor + " " + (course.syllabus || "")).toLowerCase().includes(q)
   );
-  renderCourses(matches);
+  updateCourseMetrics(filtered);
+  renderCourses(filtered);
 }
 
-function renderCourses(list) {
-  const grid = document.getElementById("coursesGrid");
-  const countEl = document.getElementById("resultCount");
-  if (!grid) return;
+function renderCourses(courses) {
+  const gridContainer = document.getElementById("coursesGrid");
+  if (!gridContainer) return;
+  gridContainer.innerHTML = "";
 
-  const total = allCourses.length;
-  if (countEl) {
-    countEl.textContent = `Showing ${list.length} of ${total} course${total === 1 ? "" : "s"}`;
-  }
-  grid.innerHTML = "";
-
-  if (list.length === 0) {
-    grid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
-        <p class="muted">No courses found matching your criteria.</p>
-        <button class="btn-ghost" onclick="clearCourseSearch()" style="margin-top: 0.5rem; width: auto;">Reset Search</button>
-      </div>
-    `;
+  if (!courses || courses.length === 0) {
+    gridContainer.innerHTML = '<p class="muted" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No course records found matching criteria.</p>';
     return;
   }
 
-  list.forEach(course => {
+  courses.forEach((course) => {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
@@ -83,30 +77,34 @@ function renderCourses(list) {
         <p style="font-size: 0.85rem; color: var(--text-muted);">${course.syllabus}</p>
       </div>
       <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 0.85rem;"><strong>Credits:</strong> ${course.credits} &nbsp; <strong>Enrolled:</strong> ${course.activeEnrolled}</span>
+        <span style="font-size: 0.85rem;"><strong>Credits:</strong> ${course.credits}</span>
         <button class="btn-primary" onclick="viewCourseDetails('${course.id}')" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; width: auto;">View Module</button>
       </div>
     `;
-    grid.appendChild(card);
+    gridContainer.appendChild(card);
   });
 }
 
 function viewCourseDetails(courseId) {
-  const c = allCourses.find(x => x.id === courseId);
-  if (!c) {
-    alert("Course details could not be found.");
+  const course = allCourses.find((c) => c.id === courseId);
+  if (!course) {
+    alert("Course detail record could not be located.");
     return;
   }
 
   const details = [
-    `${c.code}: ${c.title}`,
-    "----------------------------------------",
-    `Instructor: ${c.instructor}`,
-    `Credits: ${c.credits} | Enrolled: ${c.activeEnrolled}`,
+    `Course: ${course.code} - ${course.title}`,
+    "--------------------------------------------------",
+    `Instructor: ${course.instructor}`,
+    `Credits: ${course.credits} Unit(s)`,
+    `Active Enrollment: ${course.activeEnrolled || "N/A"} students`,
     "",
-    "Syllabus & Course Outline:",
-    c.syllabus
+    "Syllabus & Core Modules:",
+    course.syllabus || "No syllabus outline currently published."
   ].join("\n");
 
   alert(details);
 }
+
+// Dynamic card injection with error boundary handling enabled
+// Error boundary: fetch failure shows inline alert-error div
