@@ -1,0 +1,163 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Catalog – GLA University LMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js" defer></script>
+  <script src="js/courses.js" defer></script>
+  <style>
+    .hero-stat-pill,
+    .filter-chip,
+    .btn-primary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-wrapper svg {
+      position: absolute;
+      left: 0.85rem;
+      color: var(--muted, #64748b);
+      pointer-events: none;
+    }
+    .search-wrapper .search-input {
+      padding-left: 2.4rem;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      GLA LMS <span class="badge badge-green session-badge">Academic Portal</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="courses.html" class="active">Courses</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assignments.html">Assignments</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><button id="navAuthBtn" class="btn-ghost" onclick="handleLogout()">Login</button></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero animate-in">
+    <div class="hero-content" style="max-width:960px;margin:0 auto;text-align:center;">
+      <div style="display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <span class="hero-stat-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2 2 7h20L12 2z"/></svg>
+          GLA University, Mathura
+        </span>
+        <span class="hero-stat-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          Department of CAE
+        </span>
+        <span class="hero-stat-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          B.Tech CSE (Core)
+        </span>
+      </div>
+
+      <h1 style="color:#fff;font-size:2.6rem;line-height:1.2;margin-bottom:1rem;">
+        Master Engineering Concepts with <span style="color:var(--accent);">Interactive LMS Modules</span>
+      </h1>
+
+      <p style="color:#e2f0e6;font-size:1.18rem;max-width:780px;margin:0 auto 1.5rem;line-height:1.6;">
+        Explore university curriculum, view module completion timelines, inspect enrolled student rosters, and transition directly to course assignments.
+      </p>
+
+      <div class="hero-cta-group" style="justify-content:center;">
+        <a href="#catalogSection" class="btn-primary" style="padding:0.85rem 1.8rem;font-size:1.05rem;text-decoration:none;">
+          <span>Browse All Courses</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </a>
+        <a href="login.html" class="btn-ghost" style="padding:0.85rem 1.8rem;font-size:1.05rem;background:rgba(255,255,255,0.15);color:#fff;border-color:rgba(255,255,255,0.3);text-decoration:none;">
+          <span>Student / Faculty Login</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Course Catalog Container -->
+  <main class="main-container" id="catalogSection">
+    <header class="page-head animate-in" style="margin-top:1.5rem;">
+      <div>
+        <h2 style="font-size:1.9rem;color:var(--text);">Active Course Catalog</h2>
+        <p id="courseCount" class="muted" style="font-size:1.02rem;">Loading academic syllabus offerings...</p>
+      </div>
+
+      <!-- Real-Time Search Bar -->
+      <div class="search-wrapper" style="min-width:320px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input 
+          id="search" 
+          class="search-input" 
+          type="search" 
+          placeholder="Search by course title, code (BCSE...), or instructor..." 
+          aria-label="Search courses"
+        />
+      </div>
+    </header>
+
+    <!-- Filter Category Chips -->
+    <div class="filter-chips-container animate-in">
+      <button class="filter-chip active" data-filter="all">All Modules (8)</button>
+      <button class="filter-chip" data-filter="popular">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Popular Courses
+      </button>
+      <button class="filter-chip" data-filter="4credits">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        4 Credits Core
+      </button>
+      <button class="filter-chip" data-filter="3credits">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        3 Credits Electives
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingIndicator" class="card" style="text-align:center;padding:2rem;">
+      <p class="muted">Loading course modules from database...</p>
+    </div>
+
+    <!-- Course Grid -->
+    <div id="courseGrid" class="courses-grid" style="margin-top:1rem;"></div>
+
+    <!-- Next Page Journey Navigation -->
+    <section class="bottom-page-nav animate-in">
+      <div>
+        <strong style="font-size:1.1rem;display:block;">Ready to check your enrolled deliverables?</strong>
+        <p class="muted" style="font-size:0.95rem;">Review submissions, upcoming tests, and assignment deadlines.</p>
+      </div>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="dashboard.html" class="btn-ghost" style="text-decoration:none;font-weight:600;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Go to Dashboard
+        </a>
+        <a href="assignments.html" class="btn-primary" style="text-decoration:none;font-weight:600;">
+          <span>Next Page: Assignments Portal</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center;padding:2.5rem 1rem;background:var(--surface);border-top:1px solid var(--border);margin-top:3rem;">
+    <p style="font-weight:700;color:var(--text);margin-bottom:0.3rem;">GLA University &bull; Learning Management System</p>
+    <p class="muted" style="font-size:0.9rem;">
+      Zero-Dependency Client-Side Architecture &bull; Group 5 Mini Project &bull; HTML5 &bull; CSS3 &bull; ES6 JavaScript &bull; JSON
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile – GLA University LMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js" defer></script>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      GLA LMS <span class="badge badge-green">Active Session</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assignments.html">Assignments</a></li>
+      <li><a href="profile.html" class="active">Profile</a></li>
+      <li><button class="btn-ghost" onclick="handleLogout()">Logout</button></li>
+    </ul>
+  </nav>
+
+  <!-- Profile Container -->
+  <main class="main-container" style="max-width:760px;">
+    <div class="card animate-in" style="padding:2.5rem 2rem;text-align:center;">
+      <div id="avatar" class="avatar-lg" style="margin:0 auto 1rem;width:88px;height:88px;font-size:2rem;border:4px solid var(--accent);box-shadow:var(--shadow-md);">
+        ?
+      </div>
+      <h1 id="pName" style="font-size:1.85rem;margin-bottom:0.25rem;">Academic User</h1>
+      <p id="pRole" class="badge badge-green" style="font-size:0.95rem;padding:0.3rem 0.8rem;text-transform:capitalize;display:inline-block;"></p>
+
+      <hr style="margin:1.75rem 0;" />
+
+      <!-- Profile Details Table -->
+      <table class="profile-table" style="font-size:1.02rem;text-align:left;max-width:550px;margin:0 auto 1.5rem;">
+        <tr>
+          <td style="font-weight:700;color:var(--text-secondary);width:150px;padding:0.6rem 0;">University ID:</td>
+          <td id="pId" style="font-weight:600;">—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--text-secondary);padding:0.6rem 0;">Institutional Email:</td>
+          <td id="pEmail" style="color:var(--primary);font-weight:600;">—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--text-secondary);padding:0.6rem 0;">Department:</td>
+          <td id="pDept">—</td>
+        </tr>
+        <tr id="semRow" style="display:none;">
+          <td style="font-weight:700;color:var(--text-secondary);padding:0.6rem 0;">Current Semester:</td>
+          <td id="pSem" style="font-weight:600;">—</td>
+        </tr>
+        <tr id="secRow" style="display:none;">
+          <td style="font-weight:700;color:var(--text-secondary);padding:0.6rem 0;">Class Section:</td>
+          <td id="pSec" style="font-weight:600;">—</td>
+        </tr>
+      </table>
+
+      <!-- Enrolled & Purchased Courses Summary -->
+      <div style="background:var(--surface-alt);border-radius:10px;padding:1.25rem;margin:1.5rem auto;text-align:left;border:1px solid var(--border);">
+        <h4 style="font-size:1.1rem;margin-bottom:0.5rem;color:var(--primary);">Active Enrolled &amp; Purchased Courses</h4>
+        <div id="enrolledCoursesBadges" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;">
+          <span class="badge badge-grey">Loading courses...</span>
+        </div>
+      </div>
+
+      <hr style="margin:1.75rem 0;" />
+
+      <!-- Edit Display Name -->
+      <div style="text-align:left;max-width:550px;margin:0 auto;">
+        <label for="nameEdit" style="font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;display:block;">
+          Update Display Name (Active Session)
+        </label>
+        <div style="display:flex;gap:0.75rem;margin-top:0.3rem;">
+          <input id="nameEdit" style="flex:1;font-size:1rem;padding:0.65rem 0.8rem;" />
+          <button class="btn-primary" onclick="saveName()" style="white-space:nowrap;padding:0.65rem 1.25rem;">
+            Save Name
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Next Page Navigation -->
+    <div class="bottom-page-nav animate-in" style="margin-top:2rem;">
+      <a href="dashboard.html" class="btn-ghost" style="text-decoration:none;">
+        ← Back to Dashboard
+      </a>
+      <a href="courses.html" class="btn-primary" style="text-decoration:none;">
+        Explore More Courses →
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const user = checkAuth();
+    if (user) {
+      const initials = user.name.replace(/^(Prof\.|Dr\.)\s*/, "").split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+      document.getElementById("avatar").textContent = initials;
+      document.getElementById("pName").textContent = user.name;
+      document.getElementById("pRole").textContent = user.role + " account";
+      document.getElementById("pId").textContent = user.universityId || user.rollNo || user.id || "—";
+      document.getElementById("pEmail").textContent = user.username;
+      document.getElementById("pDept").textContent = user.department || "Computer Science & Engineering";
+
+      if (user.semester) {
+        document.getElementById("semRow").style.display = "table-row";
+        document.getElementById("pSem").textContent = user.semester;
+      }
+      if (user.section) {
+        document.getElementById("secRow").style.display = "table-row";
+        document.getElementById("pSec").textContent = user.section;
+      }
+
+      document.getElementById("nameEdit").value = user.name;
+
+      // Render enrolled badges
+      renderEnrolledSummary();
+    }
+
+    function renderEnrolledSummary() {
+      const container = document.getElementById("enrolledCoursesBadges");
+      const enrolled = JSON.parse(localStorage.getItem("lms_enrolled") || "[\"CRS-001\"]");
+      const purchased = JSON.parse(localStorage.getItem("lms_purchased") || "[]");
+      const allIds = Array.from(new Set([...enrolled, ...purchased]));
+
+      if (allIds.length === 0) {
+        container.innerHTML = '<span class="muted" style="font-size:0.9rem;">No active enrollments. <a href="courses.html" style="color:var(--primary);">Enroll now →</a></span>';
+        return;
+      }
+
+      container.innerHTML = allIds.map(id => {
+        const isPur = purchased.includes(id);
+        return `<span class="badge ${isPur ? 'badge-orange' : 'badge-green'}" style="font-size:0.9rem;padding:0.35rem 0.8rem;">${id} ${isPur ? '(Purchased)' : '(Enrolled)'}</span>`;
+      }).join("");
+    }
+
+    function saveName() {
+      const n = document.getElementById("nameEdit").value.trim();
+      if (!n) return;
+      user.name = n;
+      sessionStorage.setItem("currentUser", JSON.stringify(user));
+      document.getElementById("pName").textContent = n;
+      const initials = n.replace(/^(Prof\.|Dr\.)\s*/, "").split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+      document.getElementById("avatar").textContent = initials;
+      alert("✅ Display name updated successfully for this active session.");
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer style="text-align:center;padding:2.5rem 1rem;background:var(--surface);border-top:1px solid var(--border);margin-top:3rem;">
+    <p style="font-weight:700;color:var(--text);margin-bottom:0.3rem;">GLA University &bull; Learning Management System</p>
+    <p class="muted" style="font-size:0.9rem;"> 3CB &bull; Group 5 &bull; B.Tech CSE (Core)</p>
+  </footer>
+</body>
+</html>

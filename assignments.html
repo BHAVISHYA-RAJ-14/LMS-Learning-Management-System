@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignments &amp; Assessments – GLA University LMS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js" defer></script>
+  <script src="js/assignments.js" defer></script>
+  <style>
+    .asn-filter-tab,
+    .btn-primary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      GLA LMS <span class="badge badge-green">Active Session</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="assignments.html" class="active">Assignments</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><button class="btn-ghost" onclick="handleLogout()">Logout</button></li>
+    </ul>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <header class="page-head animate-in">
+      <div>
+        <h1 style="font-size:2.1rem;color:var(--text);">Academic Assignments &amp; Evaluations</h1>
+        <p id="asnProgress" class="muted" style="font-size:1.05rem;">Calculating submission progress...</p>
+       </div>
+      <div>
+        <a href="courses.html" class="btn-ghost" style="text-decoration:none;font-size:0.9rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>View Course Modules</span>
+        </a>
+      </div>
+    </header>
+    <!-- Visual Progress Bar -->
+    <div class="progress-bar-container animate-in" style="height:12px;margin-bottom:1.5rem;">
+      <div id="pbar" class="progress-bar-fill" style="width:0%;"></div>
+    </div>
+
+    <!-- Filter Category Tabs -->
+    <div class="asn-filter-tabs-container animate-in">
+      <button class="asn-filter-tab active" data-filter="all">All Assignments (8)</button>
+      <button class="asn-filter-tab" data-filter="pending">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Pending Tasks
+      </button>
+      <button class="asn-filter-tab" data-filter="submitted">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Submitted
+      </button>
+      <button class="asn-filter-tab" data-filter="overdue">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Overdue
+      </button>
+    </div>
+
+    <!-- Dynamic Assignment Deliverables List -->
+    <div id="assignmentsList">
+      <div class="card" style="text-align:center;padding:2rem;">
+        <p class="muted">Loading academic assignments from DB...</p>
+      </div>
+    </div>
+
+    <!-- Next Page Navigation Bar -->
+    <section class="bottom-page-nav animate-in">
+      <div>
+        <strong style="font-size:1.1rem;display:block;">Finished with your submissions?</strong>
+        <p class="muted" style="font-size:0.95rem;">Check your overall standing on the student dashboard or browse additional courses.</p>
+      </div>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="dashboard.html" class="btn-ghost" style="text-decoration:none;font-weight:600;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Return to Dashboard
+        </a>
+        <a href="courses.html" class="btn-ghost" style="text-decoration:none;font-weight:600;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Browse Courses
+        </a>
+        <a href="profile.html" class="btn-primary" style="text-decoration:none;font-weight:600;">
+          <span>Next: Academic Profile</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align:center;padding:2.5rem 1rem;background:var(--surface);border-top:1px solid var(--border);margin-top:3rem;">
+    <p style="font-weight:700;color:var(--text);margin-bottom:0.3rem;">GLA University &bull; Learning Management System</p>
+    <p class="muted" style="font-size:0.9rem;">
+      Multi-User LocalStorage Deliverables Tracker &bull; Department of CEA &bull; Group 5
+    </p>
+  </footer>
+</body>
+</html>
