@@ -1,29 +1,225 @@
 [
   {
-    "id": "CS-301",
-    "code": "BCSE3001",
-    "title": "Cloud Computing & DevOps",
+    "id": "CRS-001",
+    "code": "BCSE0301",
+    "title": "Full-Stack Web Development",
     "instructor": "Prof. Yash Singh",
     "credits": 4,
-    "syllabus": "Virtualization, AWS Core, Containerization, Kubernetes, CI/CD pipelines.",
-    "activeEnrolled": 68
+    "activeEnrolled": 112,
+    "description": "A comprehensive course covering both front-end and back-end web development technologies. Students will learn HTML, CSS, JavaScript, React, Node.js, and database integration to build complete web applications. The course emphasizes hands-on project-based learning with real-world deployment scenarios.",
+    "duration": "14 weeks",
+    "price": 4999,
+    "popular": true,
+    "modules": [
+      "HTML5 & CSS3 Fundamentals",
+      "JavaScript ES6+ & DOM Manipulation",
+      "React.js & Component Architecture",
+      "Node.js & Express.js Backend",
+      "MongoDB & Database Design",
+      "Deployment & DevOps Basics"
+    ],
+    "enrolledStudents": [
+      "Bhavishya Raj",
+      "Aarav Sharma",
+      "Priya Verma",
+      "Ananya Singh",
+      "Vikram Patel",
+      "Arjun Mehta",
+      "Ishaan Tiwari",
+      "Aditya Yadav"
+    ]
   },
   {
-    "id": "CS-302",
-    "code": "BCSE3002",
-    "title": "Full-Stack Web Development",
-    "instructor": "Dr. R. Sharma",
+    "id": "CRS-002",
+    "code": "BCSE3001",
+    "title": "Application Build & Release Automation",
+    "instructor": "Prof. Sonal Singh",
     "credits": 3,
-    "syllabus": "HTML5, CSS3, ES6 JavaScript, DOM APIs, Client-side Storage Architecture.",
-    "activeEnrolled": 72
+    "activeEnrolled": 95,
+    "description": "This course covers modern CI/CD pipelines, build automation tools, and release management strategies. Students gain practical experience with Jenkins, Docker, Kubernetes, and automated testing frameworks. Emphasis is placed on industry best practices for continuous integration and delivery.",
+    "duration": "12 weeks",
+    "price": 3999,
+    "popular": false,
+    "modules": [
+      "Introduction to CI/CD Pipelines",
+      "Build Tools: Maven, Gradle & npm",
+      "Jenkins & GitHub Actions",
+      "Docker Containerization",
+      "Kubernetes Orchestration"
+    ],
+    "enrolledStudents": [
+      "Bhavishya Raj",
+      "Priya Verma",
+      "Rohan Gupta",
+      "Sneha Agarwal",
+      "Kavya Joshi",
+      "Diya Chauhan"
+    ]
   },
   {
-    "id": "CS-303",
-    "code": "BCSE3005",
-    "title": "Database Management Systems",
-    "instructor": "Prof. K. Verma",
+    "id": "CRS-003",
+    "code": "BCSE2501",
+    "title": "Computer Networks",
+    "instructor": "Prof. Suneet Kumar Agnihotri",
     "credits": 4,
-    "syllabus": "Relational Schemas, Normalization, JSON data parsing, Transaction controls.",
-    "activeEnrolled": 65
+    "activeEnrolled": 130,
+    "description": "An in-depth study of computer networking concepts including the OSI model, TCP/IP protocol suite, routing algorithms, and network security. Students will work with packet analysis tools and configure network devices in simulated environments. The course prepares students for industry certifications and advanced networking roles.",
+    "duration": "14 weeks",
+    "price": 4499,
+    "popular": false,
+    "modules": [
+      "Network Fundamentals & OSI Model",
+      "TCP/IP Protocol Suite",
+      "Routing & Switching",
+      "Network Security & Firewalls",
+      "Wireless Networks & IoT",
+      "Network Administration & Troubleshooting"
+    ],
+    "enrolledStudents": [
+      "Bhavishya Raj",
+      "Aarav Sharma",
+      "Rohan Gupta",
+      "Vikram Patel",
+      "Arjun Mehta",
+      "Diya Chauhan",
+      "Aditya Yadav"
+    ]
+  },
+  {
+    "id": "CRS-004",
+    "code": "BCSE2301",
+    "title": "Data Structures & Algorithms",
+    "instructor": "Prof. Yash Singh",
+    "credits": 4,
+    "activeEnrolled": 145,
+    "description": "Master fundamental and advanced data structures including arrays, linked lists, trees, graphs, and hash tables. The course covers algorithmic paradigms such as divide-and-conquer, dynamic programming, and greedy algorithms. Students solve competitive programming problems and analyze time/space complexity rigorously.",
+    "duration": "14 weeks",
+    "price": 4999,
+    "popular": true,
+    "modules": [
+      "Arrays, Strings & Linked Lists",
+      "Stacks, Queues & Hashing",
+      "Trees & Binary Search Trees",
+      "Graphs & Traversal Algorithms",
+      "Dynamic Programming",
+      "Greedy Algorithms & Complexity Analysis"
+    ],
+    "enrolledStudents": [
+      "Bhavishya Raj",
+      "Aarav Sharma",
+      "Ananya Singh",
+      "Sneha Agarwal",
+      "Arjun Mehta",
+      "Ishaan Tiwari",
+      "Aditya Yadav"
+    ]
+  },
+  {
+    "id": "CRS-005",
+    "code": "BCSE3101",
+    "title": "Cloud Computing & DevOps",
+    "instructor": "Prof. Sonal Singh",
+    "credits": 3,
+    "activeEnrolled": 88,
+    "description": "Explore cloud service models (IaaS, PaaS, SaaS), virtualization technologies, and major cloud platforms including AWS and Azure. The course integrates DevOps methodologies with cloud-native application development. Students work on real cloud deployments and infrastructure-as-code projects.",
+    "duration": "12 weeks",
+    "price": 3999,
+    "popular": false,
+    "modules": [
+      "Cloud Computing Fundamentals",
+      "AWS Core Services",
+      "Azure & Multi-Cloud Strategy",
+      "Infrastructure as Code (Terraform)",
+      "Monitoring, Logging & Observability"
+    ],
+    "enrolledStudents": [
+      "Priya Verma",
+      "Ananya Singh",
+      "Sneha Agarwal",
+      "Kavya Joshi",
+      "Diya Chauhan"
+    ]
+  },
+  {
+    "id": "CRS-006",
+    "code": "BCSE2601",
+    "title": "Database Management Systems",
+    "instructor": "Prof. Suneet Kumar Agnihotri",
+    "credits": 4,
+    "activeEnrolled": 110,
+    "description": "A thorough study of relational database design, SQL programming, normalization, and transaction management. Students also explore NoSQL databases, indexing strategies, and query optimization techniques. Hands-on labs use MySQL, PostgreSQL, and MongoDB for practical database administration.",
+    "duration": "14 weeks",
+    "price": 4499,
+    "popular": true,
+    "modules": [
+      "ER Modeling & Relational Design",
+      "SQL Programming & Joins",
+      "Normalization & Schema Refinement",
+      "Transaction Management & Concurrency",
+      "Indexing & Query Optimization",
+      "NoSQL Databases & MongoDB"
+    ],
+    "enrolledStudents": [
+      "Bhavishya Raj",
+      "Priya Verma",
+      "Rohan Gupta",
+      "Vikram Patel",
+      "Kavya Joshi",
+      "Ishaan Tiwari",
+      "Aditya Yadav"
+    ]
+  },
+  {
+    "id": "CRS-007",
+    "code": "BCSE3201",
+    "title": "Machine Learning Fundamentals",
+    "instructor": "Prof. Yash Singh",
+    "credits": 3,
+    "activeEnrolled": 76,
+    "description": "Introduction to machine learning algorithms including supervised, unsupervised, and reinforcement learning. Students implement models using Python, scikit-learn, and TensorFlow with real-world datasets. The course covers feature engineering, model evaluation, and practical deployment of ML solutions.",
+    "duration": "12 weeks",
+    "price": 5499,
+    "popular": false,
+    "modules": [
+      "Introduction to ML & Python for Data Science",
+      "Supervised Learning: Regression & Classification",
+      "Unsupervised Learning: Clustering & Dimensionality Reduction",
+      "Neural Networks & Deep Learning Basics",
+      "Model Evaluation & Deployment"
+    ],
+    "enrolledStudents": [
+      "Aarav Sharma",
+      "Ananya Singh",
+      "Sneha Agarwal",
+      "Kavya Joshi",
+      "Diya Chauhan"
+    ]
+  },
+  {
+    "id": "CRS-008",
+    "code": "BCSE2701",
+    "title": "Operating Systems",
+    "instructor": "Prof. Sonal Singh",
+    "credits": 4,
+    "activeEnrolled": 98,
+    "description": "Study the core concepts of operating systems including process management, memory management, file systems, and I/O handling. Students explore scheduling algorithms, synchronization mechanisms, and deadlock prevention strategies. Lab exercises involve working with Linux kernel modules and system-level programming.",
+    "duration": "14 weeks",
+    "price": 4499,
+    "popular": false,
+    "modules": [
+      "OS Fundamentals & Process Management",
+      "CPU Scheduling Algorithms",
+      "Memory Management & Virtual Memory",
+      "File Systems & Storage Management",
+      "Synchronization & Deadlocks",
+      "Linux Kernel & System Programming"
+    ],
+    "enrolledStudents": [
+      "Rohan Gupta",
+      "Vikram Patel",
+      "Arjun Mehta",
+      "Ishaan Tiwari",
+      "Diya Chauhan"
+    ]
   }
 ]
