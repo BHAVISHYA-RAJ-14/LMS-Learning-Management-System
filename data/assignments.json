@@ -1,34 +1,74 @@
 [
   {
-    "id": "ASN-101",
-    "courseId": "CS-301",
-    "title": "Lab Assignment 1: Architecture Documentation",
-    "dueDate": "2026-10-20",
-    "maxMarks": 20,
-    "description": "Prepare a 2-page architectural description document highlighting 3-tier modular layers."
+    "id": "ASG-001",
+    "courseId": "CRS-001",
+    "title": "Build a Responsive Portfolio Website",
+    "dueDate": "2026-10-15",
+    "maxMarks": 100,
+    "description": "Design and develop a fully responsive personal portfolio website using HTML5, CSS3, and vanilla JavaScript. The portfolio must include a hero section, projects gallery, skills section, and a contact form with client-side validation. Deploy the site on GitHub Pages or Netlify."
   },
+
   {
-    "id": "ASN-102",
-    "courseId": "CS-302",
-    "title": "Mini Project: DOM Routing Prototype",
-    "dueDate": "2026-10-30",
-    "maxMarks": 30,
-    "description": "Construct single-page dynamic view switching using client-side JavaScript."
+    "id": "ASG-002",
+    "courseId": "CRS-002",
+    "title": "CI/CD Pipeline with Jenkins & Docker",
+    "dueDate": "2026-10-22",
+    "maxMarks": 50,
+    "description": "Set up a complete CI/CD pipeline using Jenkins for a sample Node.js application. The pipeline must include stages for linting, unit testing, Docker image building, and automated deployment to a staging environment. Document the pipeline configuration with screenshots."
   },
+
   {
-    "id": "ASN-103",
-    "courseId": "CS-303",
-    "title": "Assignment 2: Normalization Exercises",
-    "dueDate": "2026-11-06",
-    "maxMarks": 15,
-    "description": "Normalize the given student-records schema up to BCNF and show each step."
+    "id": "ASG-003",
+    "courseId": "CRS-003",
+    "title": "Packet Analysis & Network Protocols Lab",
+    "dueDate": "2026-10-28",
+    "maxMarks": 75,
+    "description": "Use Wireshark to capture and analyze network traffic for HTTP, DNS, TCP, and UDP protocols. Identify packet headers, trace TCP three-way handshakes, and document DNS resolution processes. Submit a detailed lab report with annotated packet captures."
   },
+
   {
-    "id": "ASN-104",
-    "courseId": "CS-301",
-    "title": "Lab Assignment 2: Docker Deployment",
-    "dueDate": "2026-11-14",
-    "maxMarks": 25,
-    "description": "Containerize a simple web app and submit the Dockerfile with a short run report."
+    "id": "ASG-004",
+    "courseId": "CRS-004",
+    "title": "Implement Advanced Sorting & Searching Algorithms",
+    "dueDate": "2026-11-05",
+    "maxMarks": 100,
+    "description": "Implement Merge Sort, Quick Sort, Heap Sort, and Binary Search with performance benchmarking. Compare time complexities using datasets of varying sizes (1K, 10K, 100K, 1M elements). Plot performance graphs and submit a written analysis of your findings."
+  },
+
+  {
+    "id": "ASG-005",
+    "courseId": "CRS-005",
+    "title": "Deploy a Scalable App on AWS",
+    "dueDate": "2026-11-12",
+    "maxMarks": 75,
+    "description": "Deploy a containerized web application on AWS using EC2, S3, and RDS services. Configure an Application Load Balancer and Auto Scaling Group. Write Terraform scripts for infrastructure provisioning and document the entire architecture with a diagram."
+  },
+
+  {
+    "id": "ASG-006",
+    "courseId": "CRS-006",
+    "title": "Database Design & SQL Optimization Project",
+    "dueDate": "2026-11-20",
+    "maxMarks": 100,
+    "description": "Design a normalized relational database schema (up to 3NF) for a university library management system. Write complex SQL queries involving joins, subqueries, views, and stored procedures. Optimize query performance using indexing and explain plans."
+  },
+
+  {
+    "id": "ASG-007",
+    "courseId": "CRS-007",
+    "title": "Build a Spam Email Classifier using ML",
+    "dueDate": "2026-12-01",
+    "maxMarks": 100,
+    "description": "Build a spam email classifier using Naive Bayes and Logistic Regression algorithms. Use the Enron email dataset for training and testing. Perform text preprocessing (tokenization, TF-IDF), evaluate using accuracy, precision, recall, and F1-score. Submit a Jupyter notebook with detailed analysis."
+  },
+
+  {
+    "id": "ASG-008",
+    "courseId": "CRS-008",
+    "title": "Process Scheduling Simulator",
+    "dueDate": "2026-12-10",
+    "maxMarks": 75,
+    "description": "Develop a process scheduling simulator in C/Python that implements FCFS, SJF, Round Robin, and Priority Scheduling algorithms. The simulator should calculate and display average waiting time, turnaround time, and CPU utilization. Include a Gantt chart visualization for each algorithm."
   }
+  
 ]
