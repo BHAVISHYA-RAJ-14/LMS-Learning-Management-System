@@ -30,7 +30,7 @@ async function handleLogin(event) {
 }
 
 function checkAuth(allowedRoles = []) {
-  const user = JSON.parse(sessionStorage.getItem("currentUser"));
+  const user = getCurrentUser();
   if (!user) {
     window.location.href = "index.html";
     return null;
@@ -40,6 +40,30 @@ function checkAuth(allowedRoles = []) {
     window.location.href = "courses.html";
     return null;
   }
+  return user;
+}
+
+function getCurrentUser() {
+  const storedUser = sessionStorage.getItem("currentUser");
+  if (!storedUser) return null;
+
+  let user;
+  try {
+    user = JSON.parse(storedUser);
+  } catch (error) {
+    console.error("Could not read current user session:", error);
+    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("userRole");
+    return null;
+  }
+
+  if (!user || typeof user !== "object" || Array.isArray(user)) {
+    console.error("Could not read current user session: invalid session data");
+    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem("userRole");
+    return null;
+  }
+
   return user;
 }
 
@@ -75,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // submissions are stored per user so accounts do not share status
 function submissionKey(asnId) {
-  const user = JSON.parse(sessionStorage.getItem("currentUser"));
+  const user = getCurrentUser();
   return (user ? user.id : "guest") + ":" + asnId;
 }
 
